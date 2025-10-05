@@ -23,7 +23,7 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: {{ .Values.service.port }}
-
+          
           env:
             - name: REDIS_HOST
               value: "redis-db"
@@ -52,3 +52,12 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 5
             failureThreshold: 10
+
+          # ⚙️ Resources (nécessaires pour le HPA)
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"
